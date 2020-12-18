@@ -6,8 +6,6 @@ const path = require('path');
 // using Express middleware.
 app.use(express.static(path.join(__dirname, '/pub')))
 
-
-
 // will use an 'environmental variable', process.env.PORT, for deployment.
 const port = process.env.PORT || 5000
 app.listen(port, () => {

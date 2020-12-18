@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="index.css">
+  <!-- Third party library for better code embeds-->
+  <link href="prism.css" rel="stylesheet" /> 
+  <title> Blocker.js </title>
+</head>
+<body>
+<nav class="nav-bar">
+  <span class="nav-bar-title"> Blocker.js </span>
+  <div class="navbar-links">
+    <a class="nav-bar-link" href="https://github.com/csc309-fall-2020/js-library-fanzizhu"> Github </a>
+    <a class="nav-bar-link" href="https://desolate-sands-36786.herokuapp.com/examples.html"> Examples </a>
+    <a class="nav-bar-link" href="https://desolate-sands-36786.herokuapp.com/documentations.html"> Documentations </a>
+  </div>
+</nav>
+
+<div class="main-body">
+  <div class="main-title">
+    <div class="main-Blockerjs">
+      <span> B </span>
+    </div>
+    <div class="main-Blockerjs">
+      <span> l </span>
+    </div>
+    <div class="main-Blockerjs" id="main-title-O">
+      <span> o </span>
+    </div>
+    <div class="main-Blockerjs">
+      <span> c </span>
+    </div>
+    <div class="main-Blockerjs">
+      <span> k </span>
+    </div>
+    <div class="main-Blockerjs" id="main-title-E">
+      <span> e </span>
+    </div>
+    <div class="main-Blockerjs">
+      <span> r </span>
+    </div>
+    <div class="main-Blockerjs">
+      <span> .js </span>
+    </div>
+
+    <h2 class="main-sub-header">
+      Block spoilers, lock content, and create new fun user interactions to reveal your website using this lightweight JS library.
+    </h2>
+  </div>
+
+  <pre class="code-section">
+    <code class="language-js">
+      // Click on the O in the title reveals the O
+      let blockerBlurDemo = Blocker("#main-title-O").blur(5)
+
+      // Click the orange block three times and enter the password 123123
+      let blockerblockDemo = Blocker("#main-title-E")
+      blockerblockDemo.block("orange", "blockerjsMultiClick", {multiClicks: 3})
+      blockerblockDemo.setShowAction({mode: "password", password:"123123"})
+      blockerblockDemo.setAfterEffect({mode:"recover", time: 5000})
+      blockerblockDemo.setShowMethod({mode: 'slide', color: 'orange'})
+    </code>
+  </pre>
+</div>
+
+<script src="Blocker.js"></script>
+
+<script src="index.js"></script>
+<!-- Third party library for better code embeds-->
+<script src="prism.js"></script>
+
+</body>
+</html>

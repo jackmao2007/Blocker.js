@@ -7,7 +7,8 @@ function Blocker(selector) {
     self.showEvent = new CustomEvent('blockerjsShowEvent')
     self.afterEvent = new CustomEvent('blockerjsAfterEvent')
 
-    self.showMethod = () => self.replacement.parentElement.replaceChild(self.element, self.replacement)
+    self.showMethod = () => {self.replacement.parentElement.replaceChild(self.element, self.replacement)
+        self.element.dispatchEvent(self.afterEvent)}
     self.afterEffect = () => {
         return
     }
@@ -27,13 +28,13 @@ function Blocker(selector) {
         return self
     }
 
-    self.block = function(color="none", triggerEvent="click", triggerEventOptions={}){
-        const width = self.element.offsetWidth
-        const height = self.element.offsetHeight
+    self.block = function(color, triggerEvent="click", triggerEventOptions={}){
+        const width = self.element.getBoundingClientRect().width
+        const height = self.element.getBoundingClientRect().height
         self.replacement = document.createElement("div")
         let replacement = self.replacement
         replacement.id = self.element.id
-        replacement.style = self.element.style + `;min-height: ${height}px; min-width: ${width}px; background-color: ${color};`
+        replacement.style = `;display: ${getComputedStyle(self.element).display} ;height: ${height}px; width: ${width}px; background-color: ${color};`
         this.setupTriggerEvent(triggerEvent, triggerEventOptions)
         replacement.addEventListener(triggerEvent, (event) => {
             self.showAction()
@@ -53,7 +54,7 @@ function Blocker(selector) {
         const width = self.element.offsetWidth
         const height = self.element.offsetHeight
         let replacement = self.replacement
-        replacement.style = self.element.style + `; -webkit-filter: blur(${blurStrength}px);
+        replacement.style = `;display: ${getComputedStyle(self.element).display}; -webkit-filter: blur(${blurStrength}px);
                                                     -moz-filter: blur(${blurStrength}px);
                                                     -o-filter: blur(${blurStrength}px);
                                                     -ms-filter: blur(${blurStrength});filter: blur(${blurStrength}px);`
@@ -116,11 +117,11 @@ function Blocker(selector) {
     self.setShowAction = function(config){
         if (config.mode === "password"){
             self.showAction = () => {
-                if (self.replacement.parentElement.querySelectorAll(":scope > .passwordShowActionContainer").length === 0){
+                if (!self.passwordLock){
                     let cont = document.createElement("div")
                     let btn = document.createElement("button")
                     let inpt = document.createElement("input")
-                    cont.className = "passwordShowActionContainer"
+                    self.passwordLock = cont
                     const repPos = self.replacement.getBoundingClientRect()
                     cont.style = `; position: absolute; left:${repPos.x + document.documentElement.scrollLeft+ repPos.width/2}px;
                                     top:${repPos.y + document.documentElement.scrollTop + repPos.height/2}px; transform: translate(-50%, -50%);
@@ -133,8 +134,10 @@ function Blocker(selector) {
                         if (inpt.value == config.password){
                             self.replacement.dispatchEvent(self.showEvent)
                             cont.parentElement.removeChild(cont)
+                            self.passwordLock = null
                         }else{
                             cont.parentElement.removeChild(cont)
+                            self.passwordLock = null
                         }
                     }
                     btn.onclick = checkVal
@@ -149,7 +152,6 @@ function Blocker(selector) {
                 }
 
                 let svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-                self.puzzleSvg = svg
                 svg.setAttribute("width", 100);
                 svg.setAttribute("height", 100);
                 svg.setAttribute("viewBox", [0, 0, 100 * size, 100 * size].join(" "));
@@ -159,12 +161,12 @@ function Blocker(selector) {
                 border: 1px solid black`
 
                 this.replacement.parentElement.appendChild(svg)
+                self.puzzleSvg = svg
 
                 let map = []
                 for (let i = 0; i < size; i++) {
                     map.push([])
                     for (let j = 0; j < size; j++){
-                        console.log(i, j)
                         map[i].push(false)
                         let g = document.createElementNS("http://www.w3.org/2000/svg", 'g')
                         let rec = document.createElementNS("http://www.w3.org/2000/svg", 'rect')
@@ -182,18 +184,28 @@ function Blocker(selector) {
                             } else {
                                 rec.setAttribute("fill", "white")
                             }
-                            console.log(JSON.stringify(map))
-                            console.log(JSON.stringify(config.trueMap))
                             if (JSON.stringify(map) == JSON.stringify(config.trueMap)){
                                 self.replacement.dispatchEvent(self.showEvent)
                                 svg.parentElement.removeChild(svg)
-                                self.svg = null
+                                self.puzzleSvg = null
+                                window.removeEventListener('click', handleOffClickPuzzleRemove)
                             }
                         })
                     }
-
                 }
+                setTimeout(() => {
+                    window.addEventListener('click', handleOffClickPuzzleRemove);
+                }, 100);
 
+                function handleOffClickPuzzleRemove(e){
+                    if (self.puzzleSvg.parentElement){
+                        if (!self.puzzleSvg.contains(e.target)){
+                            self.puzzleSvg.parentElement.removeChild(self.puzzleSvg)
+                            self.puzzleSvg = null
+                            window.removeEventListener('click', handleOffClickPuzzleRemove)
+                        }
+                    }
+                }
             }
         }
         return self
@@ -295,7 +307,7 @@ function Blocker(selector) {
             self.showMethod = () => {
                 let rep = document.createElement("div")
                 const repPos = self.replacement.getBoundingClientRect()
-                rep.style = self.element.style + `; position: absolute; left:${repPos.x + document.documentElement.scrollLeft}px;
+                rep.style = `;display: ${getComputedStyle(self.element).display}; position: absolute; left:${repPos.x + document.documentElement.scrollLeft}px;
                 top:${repPos.y + document.documentElement.scrollTop}px;}; height:${repPos.height}px; width:${repPos.width}px; background-color: ${config.color};`
 
                 self.replacement.parentElement.appendChild(rep)
@@ -318,7 +330,7 @@ function Blocker(selector) {
                 let rep = document.createElement("div")
                 const speed = config.speed ? config.speed : 10
                 const repPos = self.replacement.getBoundingClientRect()
-                rep.style = self.element.style + `; position: absolute; left:${repPos.x + document.documentElement.scrollLeft}px;
+                rep.style = `;display: ${getComputedStyle(self.element).display}; position: absolute; left:${repPos.x + document.documentElement.scrollLeft}px;
                 top:${repPos.y + document.documentElement.scrollTop}px;}; height:${repPos.height}px; width:${repPos.width}px; background-color: ${config.color};`
 
                 self.replacement.parentElement.appendChild(rep)

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="documentations.css">
+    <!-- Third party library for better code embeds-->
+    <link href="prism.css" rel="stylesheet" /> 
+    <title> Blocker.js </title>
+</head>
+<body>
+<nav class="nav-bar">
+    <span class="nav-bar-title"> Blocker.js </span>
+    <div class="navbar-links">
+        <a class="nav-bar-link" href="https://github.com/csc309-fall-2020/js-library-fanzizhu"> Github </a>
+        <a class="nav-bar-link" href="https://desolate-sands-36786.herokuapp.com/examples.html"> Examples </a>
+        <a class="nav-bar-link" href="https://desolate-sands-36786.herokuapp.com/documentations.html"> Documentations </a>
+    </div>
+</nav>
+<div class="main-body">
+
+    <h1> Documentations </h1>
+    <p> Blocker.js allows users to put restrictions on content and provides a few ways to hide contents, lock contents, show contents, and add effects to unlocked contents.
+        Blocker.js do this by first adding a way to block the content, then set up a way to trigger the blocked content to show, then let the user meet certain conditions, then sets up
+         animations to show the blocked contents, unlock the content, and finally setup after effects for the unlocked contents.
+    </p>
+
+    <h2> Blocker.js instance </h2>
+
+    A new blocker instance is created by calling
+     <code class="language-js"> Blocker(query) </code>
+    where query is a CSS selector
+    <pre>
+        <code class="language-js"> let blocker = Blocker("#main-body") </code>
+    </pre>
+    
+    <h2> Block Methods </h2>
+        <table>
+            <tbody>
+                <tr>
+                    <th> Method </th>
+                    <th> Params </th>
+                    <th> Description </th>
+                </tr>
+                <tr>
+                    <td> hide </td>
+                    <td> <div> triggerEvent </div> <div> triggerEventOptions </div> </td>
+                </tr>
+                <tr>
+                    <td> block </td>
+                    <td> <div> color </div> <div> triggerEvent </div> <div> triggerEventOptions </div> </td>
+                </tr>
+                <tr>
+                    <td> blur </td>
+                    <td> <div> blurStrength </div> <div> triggerEvent </div> <div> triggerEventOptions </div> </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        Refer to Trigger Method for help on triggerEvent and triggerEventOptions.
+
+    <h2> Trigger Method </h2>
+
+    <table>
+        <tbody>
+            <tr>
+                <th> triggerEvent </th>
+                <th> Required triggerEventOptions </th>
+                <th> Description </th>
+            </tr>
+            <tr>
+                <td> 'blockerjsScroll' </td>
+                <td> <div> triggerEvent </div> <div> triggerEventOptions </div> </td>
+            </tr>
+            <tr>
+                <td> 'blockerjsHold'  </td>
+                <td> <div> color </div> <div> triggerEvent </div> <div> triggerEventOptions </div> </td>
+            </tr>
+            <tr>
+                <td> "blockerjsMultiClick" </td>
+                <td> <div> blurStrength </div> <div> triggerEvent </div> <div> triggerEventOptions </div> </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2> Action Method </h2>
+
+    <h2> Show Method </h2>
+    <h2> After Effects </h2>
+</div>
+
+
+
+<script src="Blocker.js"></script>
+
+<script src="example.js"></script>
+<!-- Third party library for better code embeds-->
+<script src="prism.js"></script>
+
+</body>
+</html>
