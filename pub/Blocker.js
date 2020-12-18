@@ -81,7 +81,9 @@ function Blocker(selector) {
             const scrollTop = triggerEventOptions.scrollTop
             function myFunction() {
                 if (document.body.scrollTop > scrollTop || document.documentElement.scrollTop > scrollTop) {
-                    self.replacement.dispatchEvent(scrollEvent)
+                    if (self.replacement.parentElement){
+                        self.replacement.dispatchEvent(scrollEvent)
+                    }
                 }
             }
         } else if (triggerEvent === "blockerjsHold") {

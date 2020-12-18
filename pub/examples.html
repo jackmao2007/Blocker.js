@@ -1,63 +1,188 @@
 <!DOCTYPE html>
 <html>
+<head>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="documentations.css">
+    <!-- Third party library for better code embeds-->
+    <link href="prism.css" rel="stylesheet" /> 
+    <title> Blocker.js Examples </title>
+</head>
 <body>
 
-<h1>Blocker.js demmo</h1>
 
-<p> follow each instructions to see an demo of features.</p>
-<h4> The hidden elements will not show in page</h4>
-<h4> Refresh the page to hide all elements again </h4>
+  <nav class="nav-bar">
+      <span class="nav-bar-title"> Blocker.js </span>
+      <div class="navbar-links">
+          <a class="nav-bar-link" href="https://github.com/csc309-fall-2020/js-library-fanzizhu"> Github </a>
+          <a class="nav-bar-link" href="https://desolate-sands-36786.herokuapp.com/examples.html"> Examples </a>
+          <a class="nav-bar-link" href="https://desolate-sands-36786.herokuapp.com/documentations.html"> Documentations </a>
+      </div>
+  </nav>
+  <div class="main-body">
+  <h1> Examples </h1>
+  <p> Refresh the page to reset all examples </p>
 
-Click the button to show hidden content:
-<button id='demo-trigger-1'> Show </button>
-<div style="margin:10px;border-style: solid; width: 200px; min-height: 1px;">
-  <div id="hide-demo">
-    <span> This is revealed on click of the above button <span>
+  <h3> Hide a HTML element </h3>
+
+  Click the button to show hidden content:
+  <button id='demo-trigger-1'> Show </button>
+  <div style="margin:10px;border-style: solid; width: 400px; min-height: 1px;">
+    <div id="hide-demo">
+      <span> This is revealed on click of the above button </span>
+        <div>------------------------------------------------------------ </div>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+      </div>
+  </div>
+
+  <div class="code-container">
+    <h3> JS </h3>
+    <pre>
+      <code class="language-js">
+        // setup
+        const triggerShow = new CustomEvent('show1')
+        document.querySelector('#demo-trigger-1').addEventListener("click", (event) => {
+          document.querySelector('#hide-demo').dispatchEvent(triggerShow)
+          })
+        // end setup
+        function showContent() {
+          return true
+        }
+
+        let hideDemo = Blocker("#hide-demo").hide('show1')
+      </code>
+    </pre>
+  </div>
+
+  <h3> Blur a HTML element </h3>
+
+  Scroll Down to show blurred content
+  <div style="margin:10px; border-style: solid; width: 400px; min-height: 1px;">
+    <div id="blur-demo">
+      <span> This is revealed by scrolling down to 900px, content under this effect will show in page </span>
+      <div>------------------------------------------------------------ </div>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+
+    </div>
+  </div>
+
+  <div class="code-container">
+    <h3> JS </h3>
+    <pre>
+      <code class="language-js">
+        let blurDemo = Blocker("#blur-demo").blur(2, "blockerjsScroll", {scrollTop: 600})
+      </code>
+    </pre>
+  </div>
+
+  <h3> Block a HTML element </h3>
+
+  Click the colored area to show blocked content
+  <div style="margin:10px; border-style: solid; width: 400px; min-height: 1px;">
+    <div id="block-demo">
+      <span> This is revealed by clicking the blocked area </span>
+      <div>------------------------------------------------------------ </div>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+
+    </div>
+  </div>
+
+  <div class="code-container">
+    <h3> JS </h3>
+    <pre>
+      <code class="language-js">
+        let blockDemo = Blocker("#block-demo").block("lightblue")
+      </code>
+    </pre>
+  </div>
+
+
+  <h3> Setting up trigger methods, action methods </h3>
+
+  Click and hold the colored area for two seconds, then enter password 123123 to show blocked content
+  <div style="margin:10px; border-style: solid; width: 400px; min-height: 1px;">
+    <div id="block-demo2">
+      <span> This is revealed by clicking and holding the blocked area, then entering password "123123" </span>
+      <div>------------------------------------------------------------ </div>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+
+    </div>
+  </div>
+
+  <div class="code-container">
+    <h3> JS </h3>
+    <pre>
+      <code class="language-js">
+        let blockDemo2 = Blocker("#block-demo2").block("orange", "blockerjsHold", {holdDuration: 2000})
+        blockDemo2.setShowAction({mode: "password", password:"123123"})
+      </code>
+    </pre>
+  </div>
+
+
+  <h3> Setting up reveil methods, after effects </h3>
+
+  Click the colored area to show blocked content
+  <div style="margin:10px; border-style: solid; width: 400px; min-height: 1px;">
+    <div id="block-demo3">
+      <span> This is revealed by clicking the blocked area, the colored block will slide and disapear, the reveil contents will shake </span>
+      <div>------------------------------------------------------------ </div>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+
+    </div>
+  </div>
+
+  <div class="code-container">
+    <h3> JS </h3>
+    <pre>
+      <code class="language-js">
+        let blockDemo3 = Blocker("#block-demo3").block("lightblue")
+        blockDemo3.setAfterEffect({mode: "tremble", time: 2000})
+        blockDemo3.setShowMethod({mode: 'slide', color: 'lightblue'})
+      </code>
+    </pre>
+  </div>
+
+
+  <h3> Putting it all together  </h3>
+
+  Click the blocked area 5 times, and solve the puzzle to show blocked content, see code for puzzle solution
+  <div style="margin:10px; border-style: solid; width: 400px; min-height: 1px;">
+    <div id="all-demo">
+      <span> This is revealed by clicking the blocked area 5 times, and solving the puzzle. The content will be hidden again in 2 seconds </span>
+      <div>------------------------------------------------------------ </div>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+
+    </div>
+  </div>
+
+  <div class="code-container">
+    <h3> JS </h3>
+    <pre>
+      <code class="language-js">
+        let allDemo = Blocker("#all-demo").block("orange", "blockerjsMultiClick", {multiClicks: 5})
+        allDemo.setShowAction({mode: "puzzle",color:"lightblue", trueMap: [[true, false,false,false],
+                                                                           [true, false,false,false],
+                                                                           [false, true,false,false],
+                                                                           [false, false,true,false]]})
+        allDemo.setShowMethod({mode: 'fade', color: 'orange'})
+        allDemo.setAfterEffect({mode:"recover", time: 2000})
+      </code>
+    </pre>
+  </div>
+
+  
+
+
+  <div style="margin-top:400px; width: 200px; min-height: 1px;">
 
   </div>
-</div>
-
-Click the colored area to show blocked content
-<div style="margin:10px; border-style: solid; width: 200px; min-height: 1px;">
-  <div id="block-demo">
-    <span> This is revealed by clicking the blocked area <span>
-
   </div>
-</div>
-
-Click the colored area to show blocked content
-<div style="margin:10px; border-style: solid; width: 200px; min-height: 1px;">
-  <div id="block-demo2">
-    <span> This is revealed by clicking the blocked area <span>
-
-  </div>
-</div>
-
-
-Click the blured area to show blurred content
-<div style="margin:10px; border-style: solid; width: 200px; min-height: 1px;">
-  <div id="blur-demo">
-    <span> This is revealed by clicking the blured area, content under this effect will show in page <span>
-
-  </div>
-</div>
-
-Click the blocked area and enter the password "123123" to show blocked content
-<div style="margin:10px; border-style: solid; width: 200px; min-height: 1px;">
-  <div id="password-demo">
-    <span> This is revealed by clicking the blocked area, and entering the passowrd <span>
-
-  </div>
-</div>
-
-<div style="margin-top:400px; border-style: solid; width: 200px; min-height: 1px;">
-
-</div>
-
 
 <script src="Blocker.js"></script>
 
 <script src="example.js"></script>
+<!-- Third party library for better code embeds-->
+<script src="prism.js"></script>
 
 </body>
 </html>

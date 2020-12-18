@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="documentations.css">
     <!-- Third party library for better code embeds-->
     <link href="prism.css" rel="stylesheet" /> 
-    <title> Blocker.js </title>
+    <title> Blocker.js Documentations </title>
 </head>
 <body>
 <nav class="nav-bar">
@@ -34,59 +34,192 @@
     </pre>
     
     <h2> Block Methods </h2>
+        Block methhods sets up how an element is hidden.
+        <pre>
+            <code class="language-js"> blocker.block(color) </code>
+        </pre>
         <table>
             <tbody>
                 <tr>
                     <th> Method </th>
                     <th> Params </th>
+                    <th> Type </th>
                     <th> Description </th>
                 </tr>
                 <tr>
                     <td> hide </td>
-                    <td> <div> triggerEvent </div> <div> triggerEventOptions </div> </td>
+                    <td> <div> triggerEvent (Required)</div> <div> triggerEventOptions </div> </td>
+                    <td> <div> String </div> <div> Obj </div> </td>
+                    <td> Hides the html element completly, start reveil process when triggerEvent is triggered </td>
                 </tr>
                 <tr>
                     <td> block </td>
-                    <td> <div> color </div> <div> triggerEvent </div> <div> triggerEventOptions </div> </td>
+                    <td> <div> color (Required)</div> <div> triggerEvent </div> <div> triggerEventOptions </div> </td>
+                    <td> <div> String </div><div> String </div> <div> Obj </div> </td>
+                    <td> Creates a new element that is a colored block, and replace the position of the original element. start reveil process when triggerEvent is triggered to swap the original element back</td>
                 </tr>
                 <tr>
                     <td> blur </td>
-                    <td> <div> blurStrength </div> <div> triggerEvent </div> <div> triggerEventOptions </div> </td>
+                    <td> <div> blurStrength (Required)</div> <div> triggerEvent </div> <div> triggerEventOptions </div> </td>
+                    <td> <div> Integer </div><div> String </div> <div> Obj </div> </td>
+                    <td> Creates a new element that is the original element with a blurred filter, and replace the position of the original element. start reveil process when triggerEvent is triggered to swap the original element back</td>
                 </tr>
             </tbody>
         </table>
         
-        Refer to Trigger Method for help on triggerEvent and triggerEventOptions.
+        <p> Refer to Trigger Method for help on triggerEvent and triggerEventOptions. </p>
 
     <h2> Trigger Method </h2>
+    Trigger methods setups up how the reveil process is triggered. This is defaulted to click. 
+    <pre>
+        <code class="language-js"> blocker.setupTriggerEvent(triggerEvent, triggerEventOptions) </code>
+    </pre>
 
     <table>
         <tbody>
             <tr>
                 <th> triggerEvent </th>
                 <th> Required triggerEventOptions </th>
+                <th> Type </th>
                 <th> Description </th>
             </tr>
             <tr>
                 <td> 'blockerjsScroll' </td>
-                <td> <div> triggerEvent </div> <div> triggerEventOptions </div> </td>
+                <td> <div> scrollTop </div> </td>
+                <td> <div> Integer </div> </td>
+                <td> scrollTop is a integer indicating how far from the top must be scrolled to start the reveil. This mode starts the reveil process by scrolling to a certain postion in the window</td>
             </tr>
             <tr>
                 <td> 'blockerjsHold'  </td>
-                <td> <div> color </div> <div> triggerEvent </div> <div> triggerEventOptions </div> </td>
+                <td> <div> holdDuration </div> </td>
+                <td> <div> Integer </div> </td>
+                <td> holdDuration is a integer indicating how many miliseconds must the user hold down the mouse on the element to start the reveil. This mode starts the reveil process by holding down the mouse on the element for a set duration </td>
             </tr>
             <tr>
                 <td> "blockerjsMultiClick" </td>
-                <td> <div> blurStrength </div> <div> triggerEvent </div> <div> triggerEventOptions </div> </td>
+                <td> <div> multiClicks </div> </td>
+                <td> <div> Integer </div> </td>
+                <td> multiClicks is a integer indicating how many times must the user click on the element to start the reveil. This mode starts the reveil process by clicking on the element for set amount of times</td>
+            
             </tr>
         </tbody>
     </table>
 
     <h2> Action Method </h2>
+    Action method sets up the necessary actions the users must perfrom to reviel the contents. This is defaulted to none
+    <pre>
+        <code class="language-js"> blocker.setShowAction(config) </code>
+    </pre>
+    <div>
+        <h4> config</h4>
+        config is a object consiting of atributes:
+        <div class="config-div"> mode </div>
+        <div class="config-div"> [, params ] </div>
+    </div>
+    <table>
+        <tbody>
+            <tr>
+                <th> mode </th>
+                <th> params </th>
+                <th> Type </th>
+                <th> Description </th>
+            </tr>
+            <tr>
+                <td> "password" </td>
+                <td> <div> password </div> </td>
+                <td> <div> String </div> </td>
+                <td> The password mode has one params password which is the correct password the user must enter. This mode will create a prompt to enter password in the center of the element when triggered. The element is reveiled when the user submit the correct password</td>
+            </tr>
+            <tr>
+                <td> "puzzle" </td>
+                <td> <div> size </div> <div> color </div> <div> trueMap </div> </td>
+                <td> <div> Integer </div> <div> String </div> <div> Array[Array[Boolean]] </div> </td>
+                <td> The puzzle mode has three params. size is the dimensions of the grid generated, color is the fill color of the grid, and trueMap is the grid that the user must match in order to reveil the element.
+                     This mode will create a grid in the center of the element when triggered. The user can fill or unfill the grid cells to match the trueMap, once the grid matches, the element is reveiled</td>
+            </tr>
+        </tbody>
+    </table>
+
 
     <h2> Show Method </h2>
+    Show method sets up the how the element is revieled. This is defaulted to none. (This is currently smoothly integrated with .block)
+    <pre>
+        <code class="language-js"> blocker.setShowMethod(config) </code>
+    </pre>
+    <div>
+        <h4> config</h4>
+        config is a object consiting of atributes:
+        <div class="config-div"> mode </div>
+        <div class="config-div"> [, params ] </div>
+
+        <table>
+            <tbody>
+                <tr>
+                    <th> mode </th>
+                    <th> params </th>
+                    <th> Type </th>
+                    <th> Description </th>
+                </tr>
+                <tr>
+                    <td> "scratch" </td>
+                    <td> <div> scratchSize </div> <div> color </div> <div> percentReveil </div> </td>
+                    <td> <div> Integer </div> <div> String </div> <div> Integer </div> </td>
+                    <td> The scratch mode has three params. scratchSize is the size of the scratching brush, color is the color of the scratcher cover, percentReviel is the percentage that needs to be scratched to reveil the entire element.
+                        This mode upon reveil will create a scratcher of a set color on the element, the user can scratch off the sratcher to see the content.</td>
+                </tr>
+                <tr>
+                    <td> "fade" </td>
+                    <td> <div> color </div> </td>
+                    <td> <div> String </div> </td>
+                    <td> The fade mode has three params, the color indicates the color of the block created. This mode upon reveil will create a block of the set color on top of the element and gradually fade away to reveil the contents</td>
+                </tr>
+                <tr>
+                    <td> "slide" </td>
+                    <td> <div> color </div> <div> speed </div> </td>
+                    <td> <div> String </div> <div> Integer </div> </td>
+                    <td> The slide mode has two params. The color indicates the color of the block created, the speed indicates how fast the block slides away. This mode upon reveil will create a block of the set color on top of the element and slide away to the right and eventually disapear at 100% width to reveil the contents. 
+                </tr>
+            </tbody>
+        </table>
+        
     <h2> After Effects </h2>
-</div>
+    After Effects sets up how the element is treated after the contents are completely reveiled. This is defaulted to none.
+    <pre>
+        <code class="language-js"> blocker.setAfterEffect(config) </code>
+    </pre>
+    <div>
+        <h4> config</h4>
+        config is a object consiting of atributes:
+        <div class="config-div"> mode </div>
+        <div class="config-div"> [, params ] </div>
+
+        <table>
+            <tbody>
+                <tr>
+                    <th> mode </th>
+                    <th> params </th>
+                    <th> Type </th>
+                    <th> Description </th>
+                </tr>
+                <tr>
+                    <td> "tremble" </td>
+                    <td> <div> time </div> <div> trembleMagnitude </div> </td>
+                    <td> <div> Integer </div> <div> Integer </div> </td>
+                    <td> The tremble mode has two params. time indicates the duration the element will tremble in miliseconds, and trembleMagnitude indicates how big each shakes will be.
+                        This mode after content reveil will shake the content for the set time duration.</td>
+                </tr>
+                <tr>
+                    <td> "recover" </td>
+                    <td> <div> time </div> </td>
+                    <td> <div> Integer </div> </td>
+                    <td> The recover mode has one params, the time indicates how long the element is covered up again in miliseconds. This mode after content reveil will cover up the element again using the original methods. </td>
+                </tr>
+            </tbody>
+        </table>
+        
+    </div>
+
+
 
 
 

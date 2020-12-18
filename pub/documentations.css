@@ -1,8 +1,44 @@
 td {
     font-size: 18px;
     font-weight: 500;
+    padding: 2px;
+    border-bottom: lightblue;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    padding: 5px;
 }
 
 th {
     font-size: 20px;
+    min-width: 200px;
+}
+
+p {
+    font-size: 20px;
+}
+
+div {
+    font-size: 20px;
+}
+
+h2 {
+    font-size: 30px;
+}
+
+.config-div{
+    margin-left: 50px;
+}
+
+table {
+    margin: 20px;
+}
+
+.code-container{
+    width: 1000px;
+    font-size: 15px;
+    overflow: auto;
+}
+
+h3 {
+    font-size: 30px;
 }

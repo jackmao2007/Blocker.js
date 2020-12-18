@@ -8,17 +8,28 @@ function showContent() {
   return true
 }
 
-Blocker("#hide-demo").hide('show1')
-let blockDemo = Blocker("#block-demo").block("orange", "blockerjsHold", {holdDuration: 2000})
-blockDemo.setAfterEffect({mode: "tremble", time: 2000})
-blockDemo.setShowMethod({mode: "scratch", color: "orange", percentReveil: 70, scratchSize: 10})
-let blockDemo2 = Blocker("#block-demo2").block("orange")
-blockDemo2.setAfterEffect({mode: "tremble", time: 2000})
-blockDemo2.setShowMethod({mode: 'slide', color: 'orange'})
-blockDemo2.setShowAction({mode: "puzzle",color:"orange", trueMap: [[true, false,false,false],
-                                                                  [true, false,false,false],
-                                                                  [false, true,false,false],
-                                                                  [false, false,true,false]]})
-Blocker("#blur-demo").blur(2, "blockerjsScroll", {scrollTop: 100})
-let passwordDemo = Blocker("#password-demo").setShowAction({mode: "password", password:"123123"}).block("orange", "blockerjsMultiClick", {multiClicks: 5})
-passwordDemo.setAfterEffect({mode:"recover", time: 2000})
+let hideDemo = Blocker("#hide-demo").hide('show1')
+
+let blockDemo = Blocker("#block-demo").block("lightblue")
+
+let blockDemo2 = Blocker("#block-demo2").block("orange", "blockerjsHold", {holdDuration: 2000})
+blockDemo2.setShowAction({mode: "password", password:"123123"})
+
+let blockDemo3 = Blocker("#block-demo3").block("lightblue")
+
+blockDemo3.setAfterEffect({mode: "tremble", time: 2000})
+blockDemo3.setShowMethod({mode: 'slide', color: 'lightblue'})
+
+
+let blurDemo = Blocker("#blur-demo").blur(2, "blockerjsScroll", {scrollTop: 900})
+
+let allDemo = Blocker("#all-demo").block("orange", "blockerjsMultiClick", {multiClicks: 5})
+
+allDemo.setShowAction({mode: "puzzle",color:"lightblue", trueMap: [[true, false,false,false],
+[true, false,false,false],
+[false, true,false,false],
+[false, false,true,false]]})
+
+allDemo.setShowMethod({mode: 'fade', color: 'orange'})
+
+allDemo.setAfterEffect({mode:"recover", time: 2000})
