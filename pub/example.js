@@ -18,7 +18,7 @@ blockDemo2.setShowAction({mode: "password", password:"123123"})
 let blockDemo3 = Blocker("#block-demo3").block("lightblue")
 
 blockDemo3.setAfterEffect({mode: "tremble", time: 2000})
-blockDemo3.setShowMethod({mode: 'slide', color: 'lightblue'})
+blockDemo3.setShowMethod({mode: 'scratch', scratchSize: 15, percentReveil: 85,  color: 'lightblue'})
 
 
 let blurDemo = Blocker("#blur-demo").blur(2, "blockerjsScroll", {scrollTop: 900})
@@ -30,6 +30,6 @@ allDemo.setShowAction({mode: "puzzle",color:"lightblue", trueMap: [[true, false,
 [false, true,false,false],
 [false, false,true,false]]})
 
-allDemo.setShowMethod({mode: 'fade', color: 'orange'})
+allDemo.setShowMethod({mode: 'slide', color: 'orange'})
 
 allDemo.setAfterEffect({mode:"recover", time: 2000})
