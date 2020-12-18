@@ -44,6 +44,7 @@
     color: white;
     position: relative;
     top: 100px;
+    cursor: pointer;
 }
 
 .nav-bar-link{
